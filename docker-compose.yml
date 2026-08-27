@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────────────────────
+# LokSrijan — local development services
+#
+# Provides PostgreSQL only. The frontend and backend are run directly on
+# the host (see README.md) so hot-reload stays fast for the team.
+#
+#   docker compose up -d      start Postgres
+#   docker compose ps         check status
+#   docker compose down       stop (data is preserved)
+#   docker compose down -v    stop and DELETE all data
+#
+# Values come from the repository-root .env, with the defaults below used
+# when it is absent. These are development-only credentials, never used
+# anywhere but a local machine.
+#
+# Deliberately NOT included yet: Redis, PostGIS, pgvector.
+# Those are later decisions (see docs/architecture.md).
+# ─────────────────────────────────────────────────────────────
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: loksrijan-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-loksrijan}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-loksrijan}
+      POSTGRES_DB: ${POSTGRES_DB:-loksrijan}
+    ports:
+      # host:container — change the host port if 5432 is already in use.
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - loksrijan_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-loksrijan} -d ${POSTGRES_DB:-loksrijan}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  loksrijan_pgdata:
+    name: loksrijan_pgdata

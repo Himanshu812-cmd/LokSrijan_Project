@@ -1,0 +1,75 @@
+# ─────────────────────────────────────────────────────────────
+# LokSrijan — repository ignore rules
+# ─────────────────────────────────────────────────────────────
+
+# ── Secrets & environment ────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# ── Node / Next.js (frontend) ────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+dist/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+.eslintcache
+.npm/
+.yarn/
+.pnp
+.pnp.js
+
+# ── Python / FastAPI (backend) ───────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+ENV/
+.Python
+pip-log.txt
+*.egg-info/
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── Databases & data volumes ─────────────────────────────────
+*.sqlite
+*.sqlite3
+*.db
+pgdata/
+postgres-data/
+*.dump
+*.sql.gz
+
+# ── Logs ─────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── IDE / editor ─────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

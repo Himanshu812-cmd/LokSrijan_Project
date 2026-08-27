@@ -1,0 +1,26 @@
+# Normalise line endings so a Windows checkout and a macOS/Linux checkout
+# produce identical diffs. Without this, one developer saving a file can
+# show up as "every line changed" in someone else's pull request.
+#
+# Stored in git as LF; checked out as the platform default.
+* text=auto
+
+# Always LF — these are read by shells and containers that reject CR.
+*.sh      text eol=lf
+Dockerfile text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+
+# Binary — never touch, never diff.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+
+# Generated — collapse in pull request views so reviews stay readable.
+package-lock.json linguist-generated=true diff=lockfile

@@ -1,0 +1,21 @@
+# LokSrijan backend — Python dependencies
+#
+# Kept deliberately small. Add a dependency only when it is actually needed.
+# Versions are pinned so all six developers get an identical environment.
+# Verified working on Python 3.11.9 (Windows).
+#
+# Deliberately NOT included yet (later tasks / explicit decisions):
+#   alembic         database migrations — added with the first ORM models
+#   redis           background jobs / cache
+#   pgvector        semantic similarity
+#   geoalchemy2     PostGIS / geospatial
+#   python-jose,
+#   passlib         authentication
+#   pytest          test suite
+
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+pydantic==2.13.4
+pydantic-settings==2.15.0
+sqlalchemy==2.0.52
+psycopg[binary]==3.3.4
